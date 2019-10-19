@@ -1,0 +1,4 @@
+C:\Users\Hermes\Desktop\Web Çalışmaları\MoviesDb\MoviesDB.Business.Managers\bin\Debug\MoviesDB.Business.Managers.dll
+C:\Users\Hermes\Desktop\Web Çalışmaları\MoviesDb\MoviesDB.Business.Managers\bin\Debug\MoviesDB.Business.Managers.pdb
+C:\Users\Hermes\Desktop\Web Çalışmaları\MoviesDb\MoviesDB.Business.Managers\obj\Debug\MoviesDB.Business.Managers.dll
+C:\Users\Hermes\Desktop\Web Çalışmaları\MoviesDb\MoviesDB.Business.Managers\obj\Debug\MoviesDB.Business.Managers.pdb

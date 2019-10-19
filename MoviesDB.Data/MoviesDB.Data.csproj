@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{FFA3203E-D1E4-41C4-9E82-BA47B32955ED}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MoviesDB.Data</RootNamespace>
+    <AssemblyName>MoviesDB.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Composition.AttributedModel">
+      <HintPath>..\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.AttributedModel.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.Convention">
+      <HintPath>..\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.Convention.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.Hosting">
+      <HintPath>..\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.Hosting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.Runtime">
+      <HintPath>..\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Composition.TypedParts">
+      <HintPath>..\packages\Microsoft.Composition.1.0.30\lib\portable-net45+win8+wp8+wpa81\System.Composition.TypedParts.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data Repositories\ActorRepository.cs" />
+    <Compile Include="Data Repositories\CommentRepository.cs" />
+    <Compile Include="Data Repositories\CountyRepository.cs" />
+    <Compile Include="Data Repositories\DirectorRepository.cs" />
+    <Compile Include="Data Repositories\GenreRepository.cs" />
+    <Compile Include="Data Repositories\BlogPostCommentRepository.cs" />
+    <Compile Include="Data Repositories\BlogPostRepository.cs" />
+    <Compile Include="Data Repositories\CountryRepository.cs" />
+    <Compile Include="Data Repositories\LanguageRepository.cs" />
+    <Compile Include="Data Repositories\NewsMappingRepository.cs" />
+    <Compile Include="Data Repositories\PollRepository.cs" />
+    <Compile Include="Data Repositories\PollVoteRepository.cs" />
+    <Compile Include="Data Repositories\PollVotingRecordRepository.cs" />
+    <Compile Include="Data Repositories\MovieRepository.cs" />
+    <Compile Include="Data Repositories\NewsCategoryRepository.cs" />
+    <Compile Include="Data Repositories\NewsRepository.cs" />
+    <Compile Include="Data Repositories\RatingRepository.cs" />
+    <Compile Include="Data Repositories\ReviewRepository.cs" />
+    <Compile Include="Data Repositories\RoleRepository.cs" />
+    <Compile Include="Data Repositories\StateRepository.cs" />
+    <Compile Include="Data Repositories\UserListRecordRepository.cs" />
+    <Compile Include="Data Repositories\UserListRepository.cs" />
+    <Compile Include="Data Repositories\UserRepository.cs" />
+    <Compile Include="Data Repositories\WatchlistRecordRepository.cs" />
+    <Compile Include="DataRepositoryBase.cs" />
+    <Compile Include="DataRepositoryFactory.cs" />
+    <Compile Include="Mapping\ActorConfiguration.cs" />
+    <Compile Include="Mapping\Blog\BlogPostCommentConfiguration.cs" />
+    <Compile Include="Mapping\Blog\BlogPostConfiguration.cs" />
+    <Compile Include="Mapping\LanguageConfiguration.cs" />
+    <Compile Include="Mapping\Location\CountryConfiguration.cs" />
+    <Compile Include="Mapping\Location\CountyConfiguration.cs" />
+    <Compile Include="Mapping\MovieActorMappingConfiguration.cs" />
+    <Compile Include="Mapping\Location\StateConfiguration.cs" />
+    <Compile Include="Mapping\MovieGenreMappingConfiguration.cs" />
+    <Compile Include="Mapping\ReviewConfiguration.cs" />
+    <Compile Include="Mapping\CommentConfiguration.cs" />
+    <Compile Include="Mapping\PollConfiguration.cs" />
+    <Compile Include="Mapping\PollVoteConfiguration.cs" />
+    <Compile Include="Mapping\PollVotingRecordConfiguration.cs" />
+    <Compile Include="Mapping\NewsMappingConfiguration.cs" />
+    <Compile Include="Mapping\WatchlistRecordConfiguration.cs" />
+    <Compile Include="Mapping\DirectorConfiguration.cs" />
+    <Compile Include="Mapping\GenreConfiguration.cs" />
+    <Compile Include="Mapping\MovieConfiguration.cs" />
+    <Compile Include="Mapping\NewsCategoryConfiguration.cs" />
+    <Compile Include="Mapping\NewsConfiguration.cs" />
+    <Compile Include="Mapping\RatingConfiguration.cs" />
+    <Compile Include="Mapping\RoleConfiguration.cs" />
+    <Compile Include="Mapping\UserConfiguration.cs" />
+    <Compile Include="Mapping\UserListConfiguration.cs" />
+    <Compile Include="Mapping\UserListRecordConfiguration.cs" />
+    <Compile Include="Migrations\201512221241064_MovieDbContext.cs" />
+    <Compile Include="Migrations\201512221241064_MovieDbContext.Designer.cs">
+      <DependentUpon>201512221241064_MovieDbContext.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="MovieDBContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Seeder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
+      <Project>{8AB809A8-8471-4626-8DF0-51FD8B609458}</Project>
+      <Name>Core.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common.csproj">
+      <Project>{8E9DBE01-8A6C-4E8F-98C7-37F62C2D4561}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoviesDB.Business.Entities\MoviesDB.Business.Entities.csproj">
+      <Project>{00b70f58-250c-4c8f-9a2c-e76dd756ff49}</Project>
+      <Name>MoviesDB.Business.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoviesDB.Data.Contracts\MoviesDB.Data.Contracts.csproj">
+      <Project>{339F601C-6F77-4153-907E-5AE42F559BF2}</Project>
+      <Name>MoviesDB.Data.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201512221241064_MovieDbContext.resx">
+      <DependentUpon>201512221241064_MovieDbContext.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

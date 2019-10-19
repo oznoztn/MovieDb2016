@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A74D6FB0-6756-45A3-BDF0-7B2AC3544F59}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MoviesDB.Client.Entities</RootNamespace>
+    <AssemblyName>MoviesDB.Client.Entities</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="FluentValidation">
+      <HintPath>..\packages\FluentValidation.5.5.0.0\lib\Net40\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DTOs\ActorCreationData.cs" />
+    <Compile Include="DTOs\ActorData.cs" />
+    <Compile Include="DTOs\ActorDetailsData.cs" />
+    <Compile Include="DTOs\DirectorData.cs" />
+    <Compile Include="DTOs\DirectorDetailsData.cs" />
+    <Compile Include="DTOs\MovieCreationData.cs" />
+    <Compile Include="DTOs\MovieData.cs" />
+    <Compile Include="DTOs\MovieDetailsData.cs" />
+    <Compile Include="DTOs\NewsCreationData.cs" />
+    <Compile Include="DTOs\StatsMovieGenre.cs" />
+    <Compile Include="DTOs\StatsMovieYear.cs" />
+    <Compile Include="DTOs\StatsRatingDistribution.cs" />
+    <Compile Include="Entities\Actor.cs" />
+    <Compile Include="Entities\BlogPost.cs" />
+    <Compile Include="Entities\BlogPostComment.cs" />
+    <Compile Include="Entities\Comment.cs" />
+    <Compile Include="Entities\Country.cs" />
+    <Compile Include="Entities\County.cs" />
+    <Compile Include="Entities\Director.cs" />
+    <Compile Include="Entities\Genre.cs" />
+    <Compile Include="Entities\Language.cs" />
+    <Compile Include="Entities\Movie.cs" />
+    <Compile Include="Entities\MovieActorMapping.cs" />
+    <Compile Include="Entities\MovieGenreMapping.cs" />
+    <Compile Include="Entities\News.cs" />
+    <Compile Include="Entities\NewsCategory.cs" />
+    <Compile Include="Entities\NewsMapping.cs" />
+    <Compile Include="Entities\Poll.cs" />
+    <Compile Include="Entities\PollVote.cs" />
+    <Compile Include="Entities\PollVotingRecord.cs" />
+    <Compile Include="Entities\Rating.cs" />
+    <Compile Include="Entities\Review.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\State.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\UserList.cs" />
+    <Compile Include="Entities\UserListRecord.cs" />
+    <Compile Include="Entities\WatchlistRecord.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
+      <Project>{8AB809A8-8471-4626-8DF0-51FD8B609458}</Project>
+      <Name>Core.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common.csproj">
+      <Project>{8E9DBE01-8A6C-4E8F-98C7-37F62C2D4561}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

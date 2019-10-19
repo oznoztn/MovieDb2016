@@ -1,0 +1,62 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+</head>
+<body>
+<div>
+    <input type="text" id="state"/>
+    <input type="text" id="county"/>
+    <input type="button" id="postData" value="Send"/>
+</div>
+<script>
+    // NOT
+    // jQuery AJAX Get ve Post fonksiyonları wrapper fonksiyonlardır.
+    // Arka planda $.ajax() metodunu kullanırlar / çağırırlar.
+    // Diğer bir deyişe bu metotlar $.ajax() metodunun kırpılmış halleridir.
+    // Doğal olarak $.ajax() metodunun bütün fonksiyonelliğine sahip değillerdir.
+
+    // jQuery AJAX POST Request
+    // $.post( url, data, callback, type)
+
+    // $.post ile $.get arasındaki farklar
+
+    // Hem GET hemde POST request'leri server'a veri gönderebilir.
+
+    // GET ile taşınan veri query string olarak server'a gönderilir. 
+    // POST ile yollanan veri request'in body kısmında saklanır.
+    // Genelde content type application/x-www-form-urlencoded dir. 
+    //  (File upload ederken yazılanı hatırla: multipart/form-data)
+    //  (application/json bir diğer örnek)
+    //  Content-type bir çok şey olabilir.
+
+    // Genel olarak, GET request'ler server tarafında veri değişikliğine neden olmamalıdır.
+    // Bunun için POST kullanılmalıdır.
+
+    $(document).ready(function () {
+        $('#postData').on("click", function () {
+            // verileri alma
+            var stateText = $('#state').val();
+            var countyText = $('#county').val();
+
+            // json objesi tanımlama
+            var jsonObject = { "State": stateText, "County": countyText }
+
+            // obje >>> json string
+            var jsonString = JSON.stringify(jsonObject);
+
+            // yollama
+            $.post('/JqueryAjaxPostFunction/Index', { data: jsonString }, function (response) {
+                console.log(response);
+            }, 'json');
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,155 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <title>Experiment</title>
+</head>
+<body>
+<div>
+    <table>
+        <tr>
+            <td><input id="btnGetSampleData" type="submit" value="Get sample data"/></td>
+            <td><input type="text" id="txtSampleData"/></td>
+        </tr>
+    </table>
+    <br/>
+
+    <input id="btnFetchMovie" type="submit" value="Get the movie"/>
+
+    <br/><br/>
+
+    <table>
+        <tr>
+            <td><input type="text" id="txtMovieId"/></td>
+            <td><input id="btnGetMovieById" type="submit" value="Get movie by given Id"/></td>
+        </tr>
+    </table>
+
+    <br/><br/>
+    <table>
+        <tr>
+            <td><input id="btnGetMovies" type="submit" value="Get movies"/></td>
+        </tr>
+    </table>
+
+</div>
+    <div id="rData"></div>
+    <script>
+        $(document).ready(function () {
+            // $.ajax(url, [settings]) I. Overload
+            // $.ajax([settings])      II.Overload (*)
+
+            // data: server'a gönderilen veri
+            // dataType: server'dan beklenen veri
+            // contentType: server'a gönderilen verinin türü
+            //  Örneğin JSON bekleyen bir servise veri gönderebilmemiz için
+            //  contentType: application/json olmalı
+            //   Dolayısıyla data: {} kısmındaki objenin de json'a çevrilmesi gerekir.
+            $('#btnGetSampleData').on("click", function () {
+                $.ajax({
+                    type: "post",
+                    url: "@Url.Action("GetSampleData", "AjaxExperiments")",
+                    dataType: "json",
+                    contentType: "", // default application/x-www-form-urlencoded; charset=UTF-8
+                    success: function (msg) {
+                        $('#txtSampleData').val(msg);
+                    },
+                    error: function (msg) {
+
+                    }
+                });
+            });
+
+            $('#btnFetchMovie').on("click", function() {
+                $.ajax({
+                    type: "post",
+                    url: "@Url.Action("GetMovie_WithoutId", "AjaxExperiments")",
+                    dataType: "json",
+                    success: function (movie) {
+                        console.log(JSON.stringify(movie));
+                        // ÇIKTI: [{"isim":"Memento","imdb":"tt0209144","poster":"Resim yok.","konu":"Konu tanımlanmamış."}]
+
+                        // movie burada bir koleksiyon/array olduğundan (ve bir elemanlı olduğundan)
+                        console.log(movie[0].isim);
+                    },
+                    error: function() {
+
+                    }
+                });
+            });
+
+            // Server'a parametre göndermek
+            $('#btnGetMovieById').on("click", function () {
+                var movieId = $('#txtMovieId').val();
+
+                $.ajax({
+                    type: "post",
+                    url: "GetMovie_WithId/",
+                    data: {id : movieId},
+                    dataType: "json",
+                    success: function (movie) {
+                        console.log(JSON.stringify(movie));
+                    },
+                    error: function () {
+                        alert("Bir hata oluştu.");
+                    }
+                });
+
+                //$.ajax({
+                //    type: "post",
+                //    url: "GetMovie_WithId/" + movieId,
+                //    dataType: "json",
+                //    success: function (movie) {
+                //        console.log(JSON.stringify(movie));
+                //    },
+                //    error: function() {
+                //        alert("Bir hata oluştu.");
+                //    }
+                //});
+
+
+            });
+
+            $('#btnGetMovies').on("click", function () {
+                var ids = [6, 9, 12];
+
+                $.ajax({
+                    type: "post",
+                    url: "GetMovies",
+                    data: { movieIds : ids},
+                    dataType: "json",
+                    success: function (movies) {
+                        $.each(movies, function (i, item) {
+                            console.log(item.isim + " / " + item.imdb);
+                        });
+                    },
+                    error: function (msg) {
+                        alert("Bir hata oluştu.");
+                    }
+
+                    /* movies -> 3 elemanlı bir array/koleksiyon */
+
+                    /*
+                    [{ "isim": "Eternal Sunshine of the Spotless Mind", "imdb": "tt0338013" },
+                     { "isim": "How to Train Your Dragon", "imdb": "tt0892769" },
+                     { "isim": "Gladiator", "imdb": "tt0172495" }]
+
+                     Server'dan gelen veri bir json stringi şeklinde olsaydı, 
+                     arraya çevirmek için parse() metodunu kullanmamız gerekecekti.
+                     
+                     var array = JSON.parse(movies); 
+
+                     NOT: dataType: "html" yaparsan movies json stringi haline gelir.
+                    */
+                });
+            });
+        });
+    </script>
+</body>
+</html>

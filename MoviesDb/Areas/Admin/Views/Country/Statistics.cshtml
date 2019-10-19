@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Statistics";
+}
+<div class="page-head">
+    <!-- BEGIN PAGE TITLE -->
+    <div class="page-title">
+        <h1>
+            Statistics <small></small>
+        </h1>
+    </div>
+    <!-- END PAGE TITLE -->
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN CHART PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bar-chart font-green-haze"></i>
+                    <span class="caption-subject bold uppercase font-green-haze">Countries</span>
+                    <span class="caption-helper"></span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div id="chartdiv" style="height: 500px">
+
+                </div>
+            </div>
+        </div>
+        <!-- END CHART PORTLET-->
+    </div>
+</div>
+@section footerScripts
+{
+    <script src="~/Areas/Admin/Content/amcharts/amcharts.js"></script>
+    <script src="~/Areas/Admin/Content/amcharts/serial.js"></script>
+<script src="~/Areas/Admin/Content/amcharts/pie.js"></script>
+    <script src="~/Areas/Admin/Content/amcharts/themes/light.js"></script>
+
+    <script>
+    var chart = AmCharts.makeChart("chartdiv", {
+        "type": "pie",
+        "startDuration": 0,
+        "theme": "light",
+        "addClassNames": true,
+        "legend": {
+            "position": "right",
+            "marginRight": 100,
+            "autoMargins": false
+        },
+        "innerRadius": "30%",
+        "defs": {
+            "filter": [{
+                "id": "shadow",
+                "width": "200%",
+                "height": "200%",
+                "feOffset": {
+                    "result": "offOut",
+                    "in": "SourceAlpha",
+                    "dx": 0,
+                    "dy": 0
+                },
+                "feGaussianBlur": {
+                    "result": "blurOut",
+                    "in": "offOut",
+                    "stdDeviation": 5
+                },
+                "feBlend": {
+                    "in": "SourceGraphic",
+                    "in2": "blurOut",
+                    "mode": "normal"
+                }
+            }]
+        },
+        "dataProvider":@Html.Raw(ViewBag.jsonStats),
+        "valueField": "value",
+        "titleField": "title",
+        "export": {
+            "enabled": true
+        }
+    });
+
+    chart.addListener("init", handleInit);
+
+    chart.addListener("rollOverSlice", function (e) {
+        handleRollOver(e);
+    });
+
+    function handleInit() {
+        chart.legend.addListener("rollOverItem", handleRollOver);
+    }
+
+    function handleRollOver(e) {
+        var wedge = e.dataItem.wedge.node;
+        wedge.parentNode.appendChild(wedge);
+    }    </script>
+}

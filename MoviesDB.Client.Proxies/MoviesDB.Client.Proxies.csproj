@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B45DF093-46E0-44C5-A584-47AC3B62B93A}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>MoviesDB.Client.Proxies</RootNamespace>
+    <AssemblyName>MoviesDB.Client.Proxies</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\MoviesDB.Data\bin\Debug\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service Proxies\ActorProxy.cs" />
+    <Compile Include="Service Proxies\BlogPostCommentProxy.cs" />
+    <Compile Include="Service Proxies\BlogPostProxy.cs" />
+    <Compile Include="Service Proxies\CommentProxy.cs" />
+    <Compile Include="Service Proxies\CountryService.cs" />
+    <Compile Include="Service Proxies\CountyService.cs" />
+    <Compile Include="Service Proxies\DirectorProxy.cs" />
+    <Compile Include="Service Proxies\GenreProxy.cs" />
+    <Compile Include="Service Proxies\CountryProxy.cs" />
+    <Compile Include="Service Proxies\MovieProxy.cs" />
+    <Compile Include="ProxyFactory.cs" />
+    <Compile Include="Service Proxies\NewsCategoryProxy.cs" />
+    <Compile Include="Service Proxies\NewsMappingProxy.cs" />
+    <Compile Include="Service Proxies\NewsProxy.cs" />
+    <Compile Include="Service Proxies\PollProxy.cs" />
+    <Compile Include="Service Proxies\PollVoteProxy.cs" />
+    <Compile Include="Service Proxies\PollVotingRecordProxy.cs" />
+    <Compile Include="Service Proxies\RatingProxy.cs" />
+    <Compile Include="Service Proxies\ReviewProxy.cs" />
+    <Compile Include="Service Proxies\RoleProxy.cs" />
+    <Compile Include="Service Proxies\StateService.cs" />
+    <Compile Include="Service Proxies\UserListEntryProxy.cs" />
+    <Compile Include="Service Proxies\UserListProxy.cs" />
+    <Compile Include="Service Proxies\UserProxy.cs" />
+    <Compile Include="Service Proxies\WatchlistEntryProxy.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
+      <Project>{8AB809A8-8471-4626-8DF0-51FD8B609458}</Project>
+      <Name>Core.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common.Proxy\Core.Common.Proxy.csproj">
+      <Project>{3AB904AA-C13A-48C7-AA44-B77B2F23D177}</Project>
+      <Name>Core.Common.Proxy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common.csproj">
+      <Project>{8E9DBE01-8A6C-4E8F-98C7-37F62C2D4561}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoviesDB.Client.Contracts\MoviesDB.Client.Contracts.csproj">
+      <Project>{E7745693-4F71-40E6-981D-0BE52BAD266C}</Project>
+      <Name>MoviesDB.Client.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoviesDB.Client.Entities\MoviesDB.Client.Entities.csproj">
+      <Project>{A74D6FB0-6756-45A3-BDF0-7B2AC3544F59}</Project>
+      <Name>MoviesDB.Client.Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

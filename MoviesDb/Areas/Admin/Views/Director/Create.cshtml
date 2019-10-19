@@ -1,0 +1,348 @@
+﻿@using FluentValidation.Results
+@using Kendo.Mvc.UI
+@using MoviesDb.Areas.Admin.Constants
+@model Director
+
+<!-- BEGIN PAGE HEADER-->
+<!-- BEGIN PAGE HEAD -->
+<div class="page-head">
+    <!-- BEGIN PAGE TITLE -->
+    <div class="page-title">
+        <h1>Director <small></small></h1>
+    </div>
+    <!-- END PAGE TITLE -->
+</div>
+<!-- END PAGE HEAD -->
+<!-- END PAGE HEADER-->
+@if (TempData["Status"] != null)
+{
+    switch (TempData["Status"].ToString())
+    {
+        case CrudNotification.ValidationError:
+            {
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Validation Errors</h3>
+                    </div>
+                    <div class="panel-body">
+                        @foreach (var item in (IEnumerable<ValidationFailure>)ViewBag.ValidationErrors)
+                        {
+                            @item.ErrorMessage
+                            <br/>
+                        }
+                    </div>
+                </div>
+            }
+            break;
+
+        case CrudNotification.Success:
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Success!</h3>
+            </div>
+            <div class="panel-body">
+                Country updated without any fault(s).
+            </div>
+        </div>
+            break;
+
+        case CrudNotification.Failed:
+            break;
+    }
+}
+
+<div class="portlet light bordered">
+<div class="portlet-title">
+    <div class="caption">
+        <i class="icon-equalizer font-blue-hoki"></i>
+        <span class="caption-subject font-blue-hoki bold uppercase">Create</span>
+        <span class="caption-helper">Create a new director</span>
+    </div>
+</div>
+<div class="portlet-body form">
+<!-- BEGIN FORM-->
+<div class="form-horizontal">
+@using (Html.BeginForm("Create", "Director", FormMethod.Post, new {enctype = "multipart/form-data"}))
+{
+    <div class="form-body">
+    <h3 class="form-section">Person Info</h3>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">First Name</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(t => t.FirstName, new {@class = "form-control"})
+                </div>
+            </div>
+        </div>
+        <!--/span-->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">Date of Birth</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(t => t.BirthDate, new {@class = "form-control", placeholder = "dd/mm/yyyy"})
+                </div>
+            </div>
+        </div>
+        <!--/span-->
+    </div>
+    <!--/row-->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">Last Name</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(t => t.LastName, new {@class = "form-control"})
+                </div>
+            </div>
+        </div>
+        <!--/span-->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">Date of Death</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(t => t.DeathDate, new {@class = "form-control", placeholder = "dd/mm/yyyy"})
+                </div>
+            </div>
+        </div>
+        <!--/span-->
+    </div>
+    <!--/row-->
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">Gender</label>
+                <div class="col-md-9">
+                    <div class="radio-list">
+                        <label class="radio-inline">
+                            <div class="radio">
+                                @Html.RadioButtonFor(model => model.Gender, true, new {@class = "selected"})
+                            </div>
+                            Male
+                        </label>
+                        <label class="radio-inline">
+                            <div class="radio">
+                                @Html.RadioButtonFor(model => model.Gender, false)
+                            </div>
+                            Female
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--/span-->
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">Portrait Photo</label>
+                <div class="col-md-9">
+                    <div class="radio-list">
+                        <input type="file" name="file" class="default"/>
+                        <p class="help-block" style="font-style: italic">
+                            portrait photo only
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--/row-->
+
+    @*BİRİNCİ DROPDOWN*@
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">Country</label>
+                <div class="col-md-9">
+                    @(Html.Kendo().DropDownList()
+                          .Name("CountryId")
+                          .HtmlAttributes(new {@class = "form-control"})
+                          .OptionLabel("Select a country...")
+                          .DataTextField("Name")
+                          .DataValueField("Id")
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("GetCascadeCountries", "Director");
+                              });
+                          })
+                          )
+                </div>
+            </div>
+        </div>
+        <!--/span-->
+        <div class="col-md-6">
+            <div class="form-group">
+                <!--RESERVED-->
+            </div>
+        </div>
+        <!--/span-->
+    </div>
+
+    @*İKİNCİ DROPDOWN*@
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">State</label>
+                <div class="col-md-9">
+                    @(Html.Kendo().DropDownList()
+                          .Name("StateId")
+                          .HtmlAttributes(new {@class = "form-control"})
+                          .OptionLabel("Select a state...")
+                          .DataTextField("Name")
+                          .DataValueField("Id")
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("GetCascadeStates", "Director").Data("filterProducts");
+                              })
+                                  .ServerFiltering(true);
+                          })
+                          .Enable(false)
+                          .AutoBind(false)
+                          .CascadeFrom("CountryId")
+                          )
+                    <script>
+                        function filterProducts() {
+                            return {
+                                country: $("#CountryId").val()
+                            };
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+        <!--/span-->
+        <div class="col-md-6">
+            <div class="form-group">
+                <!--RESERVED-->
+            </div>
+        </div>
+        <!--/span-->
+    </div>
+
+    @*ÜÇÜNCÜ DROPDOWN*@
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">County</label>
+                <div class="col-md-9">
+                    @(Html.Kendo().DropDownList()
+                          .Name("CountyId")
+                          .HtmlAttributes(new {@class = "form-control"})
+                          .OptionLabel("Select a county...")
+                          .DataTextField("Name")
+                          .DataValueField("Id")
+                          .DataSource(source =>
+                          {
+                              source.Read(read =>
+                              {
+                                  read.Action("GetCascadeCounties", "Director").Data("filterOrders");
+                              })
+                                  .ServerFiltering(true);
+                          })
+                          .Enable(false)
+                          .AutoBind(false)
+                          .CascadeFrom("StateId")
+                          )
+                    <script>
+                        function filterOrders() {
+                            return {
+                                state: $("#StateId").val()
+                            };
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+        <!--/span-->
+        <div class="col-md-6">
+            <div class="form-group">
+                <!--RESERVED-->
+            </div>
+        </div>
+        <!--/span-->
+    </div>
+
+    <h3 class="form-section">Biography</h3>
+    <!--/row-->
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <div class="col-md-9">
+                    @(Html.Kendo().Editor()
+                          .Name("Biography")
+
+                          .HtmlAttributes(new {style = "width: 740px;height:440px"})
+                          .Tools(tools => tools
+                              .Clear()
+                              .Bold().Italic().Underline().Strikethrough()
+                              .JustifyLeft().JustifyCenter().JustifyRight().JustifyFull()
+                              .InsertUnorderedList().InsertOrderedList()
+                              .Outdent().Indent()
+                              .CreateLink().Unlink()
+                              .InsertImage()
+                              .InsertFile()
+                              .SubScript()
+                              .SuperScript()
+                              .TableEditing()
+                              .ViewHtml()
+                              .Formatting()
+                              .CleanFormatting()
+                              .FontName()
+                              .FontSize()
+                              .FontColor().BackColor()
+                              .Print()
+                          )
+                          .Value(@<text> </text>)
+                          )
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*<h3 class="form-section">Photographs</h3>
+    /row
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label class="control-label col-md-3">Portrait I</label>
+                <div class="col-sm-6 col-md-3">
+                    <img src="" style="height: 317px; width: 217px; display: block;">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+            </div>
+        </div>
+    </div>*@
+    </div>
+    <div class="form-actions">
+        <div class="row">
+            <div class="col-md-offset-3 col-md-9">
+                <input type="submit" value="Submit" class="btn green"/>
+                <a href="/admin/director/index" class="btn default">Cancel</a>
+            </div>
+        </div>
+    </div>
+}
+</div>
+<!-- END FORM-->
+</div>
+</div>
+
+<script src="~/Areas/Admin/Content/global/plugins/holder.js"></script>
+
+<script src="~/Areas/Admin/Content/kendo/js/kendo.all.min.js"></script>
+<script src="~/Areas/Admin/Content/kendo/js/kendo.aspnetmvc.min.js"></script>
+
+<link href="~/Areas/Admin/Content/kendo/styles/kendo.common.min.css" rel="stylesheet" />
+<link href="~/Areas/Admin/Content/kendo/styles/kendo.common-bootstrap.core.min.css" rel="stylesheet" />
+
+<link href="~/Areas/Admin/Content/kendo/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Areas/Admin/Content/kendo/kendopatch.css" rel="stylesheet" />

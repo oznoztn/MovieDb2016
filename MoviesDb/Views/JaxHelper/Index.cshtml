@@ -1,0 +1,50 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>title</title>
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/Ex/jquery-ui.js"></script>
+</head>
+<body>
+    <div>
+        <br />
+
+        @* KLASİK *@
+        @*<form method="get">
+                <input type="text" name="searchTerm"/>
+                <input type="submit" value="Search"/>
+            </form>*@
+
+        @*
+            InsertionMode: Ne yapmak istiyorsun? -
+                Bir alanın içeriğini serverdan gelen veri ile REPLACE etmek
+
+            Hangi alanın içeriğini?
+                UpdateTargetId'si movies olan alanın içeriğini
+        *@
+
+        @using (Ajax.BeginForm(new AjaxOptions
+        {
+            HttpMethod = "GET",
+            InsertionMode = InsertionMode.Replace,
+            UpdateTargetId = "sampleDiv"
+        }))
+        {
+            <input type="text" name="searchTerm" />
+            <input type="submit" value="Search" />
+        }
+
+        <div id="sampleDiv">
+            something
+        </div>
+
+        <script src="~/Scripts/jquery-1.10.2.js"></script>
+        <script src="~/Scripts/Ex/jquery-ui.js"></script>
+    </div>
+</body>
+</html>

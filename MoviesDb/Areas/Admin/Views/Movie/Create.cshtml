@@ -1,0 +1,317 @@
+﻿@using FluentValidation.Results
+@using Kendo.Mvc.UI
+@using MoviesDb.Areas.Admin.Constants
+@model MoviesDB.Client.Entities.DTOs.MovieCreationData
+@{
+    ViewBag.Title = "Create";
+}
+
+<!-- BEGIN PAGE HEADER-->
+<!-- BEGIN PAGE HEAD -->
+<div class="page-head">
+    <!-- BEGIN PAGE TITLE -->
+    <div class="page-title">
+        <h1>Movie <small></small></h1>
+    </div>
+    <!-- END PAGE TITLE -->
+</div>
+<!-- END PAGE HEAD -->
+<!-- END PAGE HEADER-->
+@if (TempData["Status"] != null)
+{
+    switch (TempData["Status"].ToString())
+    {
+        case CrudNotification.ValidationError:
+            {
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Validation Errors</h3>
+                    </div>
+                    <div class="panel-body">
+                        @foreach (var item in (IEnumerable<ValidationFailure>)ViewBag.ValidationErrors)
+                        {
+                            @item.ErrorMessage
+                            <br />
+                        }
+                    </div>
+                </div>
+            }
+            break;
+
+        case CrudNotification.Success:
+        <div class="panel panel-success">
+            <div class="panel-heading">
+                <h3 class="panel-title">Success!</h3>
+            </div>
+            <div class="panel-body">
+                Country updated without any fault(s).
+            </div>
+        </div>
+            break;
+
+        case CrudNotification.Failed:
+            break;
+    }
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="tabbable tabbable-custom tabbable-noborder tabbable-reversed">
+            <div class="tab-content">
+                <div class="tab-pane active" id="tab_0">
+                    <div class="portlet light bordered">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-equalizer font-red-sunglo"></i>
+                                <span class="caption-subject font-red-sunglo bold uppercase">Create</span>
+                                <span class="caption-helper">Create a new movie</span>
+                            </div>
+                        </div>
+                        <div class="portlet-body form">
+                        <div class="form-horizontal">
+                        @using (Html.BeginForm("Create", "Movie", FormMethod.Post, new {enctype = "multipart/form-data"}))
+                        {
+                            <div class="form-body">
+                            <h3 class="form-section">Base Info</h3>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Name</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(t => t.Name, new {@class = "form-control"})
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">As Known As</label>
+                                <div class="col-md-4">
+                                    @Html.TextBoxFor(t => t.Aka, new {@class = "form-control"})
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Director</label>
+                                <div class="col-md-4">
+                                    @(Html.Kendo().DropDownList()
+                                          .Name("DirectorId")
+                                          .Text("Select a director")
+                                          .AutoBind(false)
+                                          .OptionLabel("No selection")
+                                          .SelectedIndex(-1)
+                                          .DataTextField("Name")
+                                          .DataValueField("Id")
+                                          .HtmlAttributes(new {style = "width:233px", @class = "form-control"})
+                                          .Filter("contains")
+                                          .DataSource(source =>
+                                          {
+                                              source.Read(read =>
+                                              {
+                                                  read.Action("Director_Read", "Movie");
+                                              }).ServerFiltering(false);
+                                          }))
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Running Time</label>
+                                <div class="col-md-2">
+                                    @Html.TextBoxFor(t => t.RunningTime, new {@class = "form-control", @placeholder = "By minute only"})
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Release Date</label>
+                                <div class="col-md-2">
+                                    @Html.TextBoxFor(t => t.Year, new {@class = "form-control", placeholder = "By year only"})
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">IMDB Link</label>
+                                <div class="col-md-2">
+                                    @Html.TextBoxFor(t => t.ImdbLink, new {@class = "form-control", placeholder = "By year only"})
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Language</label>
+                                <div class="col-md-4">
+                                    @(Html.Kendo().DropDownList()
+                                          .Name("LanguageId")
+                                          .DataTextField("Name")
+                                          .DataValueField("Id")
+                                          .HtmlAttributes(new {style = "width:233px", @class = "form-control"})
+                                          .Filter("contains")
+                                          .DataSource(source =>
+                                          {
+                                              source.Read(read =>
+                                              {
+                                                  read.Action("Language_Read", "Movie");
+                                              })
+                                                  .ServerFiltering(false);
+                                          }))
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Country</label>
+                                <div class="col-md-4">
+                                    @(Html.Kendo().DropDownList()
+                                          .Name("CountryId")
+                                          .DataTextField("Name")
+                                          .DataValueField("Id")
+                                          .HtmlAttributes(new {style = "width:233px", @class = "form-control"})
+                                          .Filter("contains")
+                                          .DataSource(source =>
+                                          {
+                                              source.Read(read =>
+                                              {
+                                                  read.Action("Country_Read", "Movie");
+                                              })
+                                                  .ServerFiltering(false);
+                                          }))
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Actors</label>
+                                <div class="col-md-4">
+                                    @(Html.Kendo().MultiSelect()
+                                          .Name("actorIds")
+                                          .DataTextField("Name")
+                                          .AutoClose(false)
+                                          .DataValueField("Id")
+                                          .Placeholder("")
+                                          .AutoBind(false)
+                                          .DataSource(source =>
+                                          {
+                                              source.Read(read =>
+                                              {
+                                                  read.Action("Actor_Read", "Movie");
+                                              })
+                                                  .ServerFiltering(false);
+                                          })
+                                          )
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Genres</label>
+                                <div class="col-md-4">
+                                    @(Html.Kendo().MultiSelect()
+                                          .Name("genreIds")
+                                          .AutoClose(false)
+                                          .DataTextField("Name")
+                                          .DataValueField("Id")
+                                          .Filter("contains")
+                                          .DataSource(source =>
+                                          {
+                                              source.Read(read =>
+                                              {
+                                                  read.Action("Genre_Read", "Movie");
+                                              })
+                                                  .ServerFiltering(false);
+                                          }))
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Sub-Genres</label>
+                                <div class="col-md-4">
+                                    @(Html.Kendo().MultiSelect()
+                                          .AutoClose(false)
+                                          .Name("subgenreIds")
+                                          .DataTextField("Name")
+                                          .DataValueField("Id")
+                                          .Filter("contains")
+                                          .DataSource(source =>
+                                          {
+                                              source.Read(read =>
+                                              {
+                                                  read.Action("SubGenre_Read", "Movie");
+                                              })
+                                                  .ServerFiltering(false);
+                                          }))
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="col-md-9">
+                                            <input type="file" name="image"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="form-section">Description</h3>
+                            <!--/row-->
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="col-md-9">
+                                            @(Html.Kendo().Editor()
+                                                  .Name("PlotOutline")
+                                                  .HtmlAttributes(new {style = "width: 740px;height:440px"})
+                                                  .Tools(tools => tools
+                                                      .Clear()
+                                                      .Bold().Italic().Underline().Strikethrough()
+                                                      .JustifyLeft().JustifyCenter().JustifyRight().JustifyFull()
+                                                      .InsertUnorderedList().InsertOrderedList()
+                                                      .Outdent().Indent()
+                                                      .CreateLink().Unlink()
+                                                      .InsertImage()
+                                                      .InsertFile()
+                                                      .SubScript()
+                                                      .SuperScript()
+                                                      .TableEditing()
+                                                      .ViewHtml()
+                                                      .Formatting()
+                                                      .CleanFormatting()
+                                                      .FontName()
+                                                      .FontSize()
+                                                      .FontColor().BackColor()
+                                                      .Print()
+                                                  )
+                                                  .Value(@<text> </text>)
+                                                  )
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-offset-3 col-md-9">
+                                        <input type="submit" value="Submit" class="btn green"/>
+                                        <a href="/admin/movie/index" type="button" class="btn default">Cancel</a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        </div>
+                            <link href="~/Areas/Admin/Content/kendo/styles/kendo.common.min.css" rel="stylesheet" />
+                            <link href="~/Areas/Admin/Content/kendo/styles/kendo.default.min.css" rel="stylesheet" />
+
+                            <script src="~/Areas/Admin/Content/kendo/js/kendo.all.min.js"></script>
+                            <script src="~/Areas/Admin/Content/kendo/js/kendo.aspnetmvc.min.js"></script>
+
+                            <link href="~/Areas/Admin/Content/kendo/styles/kendo.metro.min.css" rel="stylesheet" />
+                            <link href="~/Areas/Admin/Content/kendo/styles/kendo.metro.mobile.min.css" rel="stylesheet" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section headerScripts {
+}
+
+@section footerScripts {
+    <script>
+        $(function() {
+            $("#DirectorId_listbox").append($('<option></option>').val(0).html("No selection"));
+
+
+        });
+    </script>
+}

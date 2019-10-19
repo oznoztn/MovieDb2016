@@ -1,0 +1,100 @@
+﻿@{
+    ViewBag.Title = "Statistics";
+}
+
+<div class="page-head">
+    <!-- BEGIN PAGE TITLE -->
+    <div class="page-title">
+        <h1>
+            Statistics <small></small>
+        </h1>
+    </div>
+    <!-- END PAGE TITLE -->
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN CHART PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bar-chart font-green-haze"></i>
+                    <span class="caption-subject bold uppercase font-green-haze">Directors</span>
+                    <span class="caption-helper">Top directors</span>
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="javascript:;" class="fullscreen">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body" id="chartdiv" style="width: 100%; height: 450px">
+
+            </div>
+        </div>
+        <!-- END CHART PORTLET-->
+    </div>
+</div>
+
+@section footerScripts{
+    <script src="~/Areas/Admin/Content/amcharts/amcharts.js"></script>
+    <script src="~/Areas/Admin/Content/amcharts/serial.js"></script>
+    <script src="~/Areas/Admin/Content/amcharts/themes/light.js"></script>
+
+    <script>
+        $(function() {
+            $.ajax({
+                type: "get",
+                url: "/admin/director/Statistics_TopXDirectors",
+                data: {top:20},
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+                    var chart = AmCharts.makeChart("chartdiv", {
+                        "type": "serial",
+                        "theme": "light",
+                        "categoryField": "Genre",
+                        "rotate": true,
+                        "startDuration": 1,
+                        "categoryAxis": {
+                            "gridPosition": "start",
+                            "position": "left"
+                        },
+
+                        "trendLines": [],
+                        "graphs": [
+                            {
+                                "balloonText": "Movie:[[value]]",
+                                "fillAlphas": 0.8,
+                                "id": "AmGraph-1",
+                                "lineAlpha": 0.2,
+                                "title": "Income",
+                                "type": "column",
+                                "valueField": "Count"
+                            }
+                        ],
+                        "guides": [],
+                        "valueAxes": [
+                            {
+                                "id": "ValueAxis-1",
+                                "position": "top",
+                                "axisAlpha": 0
+                            }
+                        ],
+                        "allLabels": [],
+                        "balloon": {},
+                        "titles": [],
+                        "dataProvider": response,
+                        "export": {
+                            "enabled": true
+                        }
+                    });
+                },
+                error: function(error) {
+                    
+                }
+            });
+        }());
+    </script>
+}

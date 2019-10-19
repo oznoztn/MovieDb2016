@@ -1,0 +1,15 @@
+C:\Users\Hermes\Desktop\Web Çalışmaları\MoviesDb\Core.Common.Proxy\bin\Debug\Core.Common.Proxy.dll
+C:\Users\Hermes\Desktop\Web Çalışmaları\MoviesDb\Core.Common.Proxy\bin\Debug\Core.Common.Proxy.pdb
+C:\Users\Hermes\Desktop\Web Çalışmaları\MoviesDb\Core.Common.Proxy\obj\Debug\Core.Common.Proxy.dll
+C:\Users\Hermes\Desktop\Web Çalışmaları\MoviesDb\Core.Common.Proxy\obj\Debug\Core.Common.Proxy.pdb
+C:\Users\Hermes\Desktop\Web Çalışmaları\MoviesDb\Core.Common.Proxy\obj\Debug\Core.Common.Proxy.csprojResolveAssemblyReference.cache
+D:\Web Çalışmaları\MoviesDb\Core.Common.Proxy\bin\Debug\Core.Common.Proxy.dll
+D:\Web Çalışmaları\MoviesDb\Core.Common.Proxy\bin\Debug\Core.Common.Proxy.pdb
+D:\Web Çalışmaları\MoviesDb\Core.Common.Proxy\obj\Debug\Core.Common.Proxy.dll
+D:\Web Çalışmaları\MoviesDb\Core.Common.Proxy\obj\Debug\Core.Common.Proxy.pdb
+D:\Web Çalışmaları\MoviesDb\Core.Common.Proxy\obj\Debug\Core.Common.Proxy.csprojResolveAssemblyReference.cache
+H:\Web Çalışmaları\MoviesDb\Core.Common.Proxy\bin\Debug\Core.Common.Proxy.dll
+H:\Web Çalışmaları\MoviesDb\Core.Common.Proxy\bin\Debug\Core.Common.Proxy.pdb
+H:\Web Çalışmaları\MoviesDb\Core.Common.Proxy\obj\Debug\Core.Common.Proxy.dll
+H:\Web Çalışmaları\MoviesDb\Core.Common.Proxy\obj\Debug\Core.Common.Proxy.pdb
+H:\Web Çalışmaları\MoviesDb\Core.Common.Proxy\obj\Debug\Core.Common.Proxy.csprojAssemblyReference.cache

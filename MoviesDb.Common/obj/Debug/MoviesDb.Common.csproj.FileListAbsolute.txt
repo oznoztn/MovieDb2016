@@ -1,0 +1,13 @@
+C:\Users\Hermes\Desktop\Web Çalışmaları\MoviesDb\MoviesDb.Common\bin\Debug\MoviesDb.Common.dll
+C:\Users\Hermes\Desktop\Web Çalışmaları\MoviesDb\MoviesDb.Common\bin\Debug\MoviesDb.Common.pdb
+C:\Users\Hermes\Desktop\Web Çalışmaları\MoviesDb\MoviesDb.Common\obj\Debug\MoviesDb.Common.dll
+C:\Users\Hermes\Desktop\Web Çalışmaları\MoviesDb\MoviesDb.Common\obj\Debug\MoviesDb.Common.pdb
+D:\Web Çalışmaları\MoviesDb\MoviesDb.Common\bin\Debug\MoviesDb.Common.dll
+D:\Web Çalışmaları\MoviesDb\MoviesDb.Common\bin\Debug\MoviesDb.Common.pdb
+D:\Web Çalışmaları\MoviesDb\MoviesDb.Common\obj\Debug\MoviesDb.Common.dll
+D:\Web Çalışmaları\MoviesDb\MoviesDb.Common\obj\Debug\MoviesDb.Common.pdb
+H:\Web Çalışmaları\MoviesDb\MoviesDb.Common\bin\Debug\MoviesDb.Common.dll
+H:\Web Çalışmaları\MoviesDb\MoviesDb.Common\bin\Debug\MoviesDb.Common.pdb
+H:\Web Çalışmaları\MoviesDb\MoviesDb.Common\obj\Debug\MoviesDb.Common.dll
+H:\Web Çalışmaları\MoviesDb\MoviesDb.Common\obj\Debug\MoviesDb.Common.pdb
+H:\Web Çalışmaları\MoviesDb\MoviesDb.Common\obj\Debug\MoviesDb.Common.csprojAssemblyReference.cache

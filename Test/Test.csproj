@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2FD093ED-2B40-4BBC-A61B-8BAABF5344D6}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Test</RootNamespace>
+    <AssemblyName>Test</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core.Common.Contracts\Core.Common.Contracts.csproj">
+      <Project>{8AB809A8-8471-4626-8DF0-51FD8B609458}</Project>
+      <Name>Core.Common.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common.Proxy\Core.Common.Proxy.csproj">
+      <Project>{3AB904AA-C13A-48C7-AA44-B77B2F23D177}</Project>
+      <Name>Core.Common.Proxy</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Core.Common\Core.Common.csproj">
+      <Project>{8E9DBE01-8A6C-4E8F-98C7-37F62C2D4561}</Project>
+      <Name>Core.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoviesDB.Business.Contracts\MoviesDB.Business.Contracts.csproj">
+      <Project>{60760C55-51F1-45A8-915C-B393CAD180D5}</Project>
+      <Name>MoviesDB.Business.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoviesDB.Business.Entities\MoviesDB.Business.Entities.csproj">
+      <Project>{00B70F58-250C-4C8F-9A2C-E76DD756FF49}</Project>
+      <Name>MoviesDB.Business.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoviesDB.Business.Managers\MoviesDB.Business.Services.csproj">
+      <Project>{99E42B0D-49C4-4DF7-B041-3E650F3F30F4}</Project>
+      <Name>MoviesDB.Business.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoviesDB.Client.Contracts\MoviesDB.Client.Contracts.csproj">
+      <Project>{E7745693-4F71-40E6-981D-0BE52BAD266C}</Project>
+      <Name>MoviesDB.Client.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoviesDB.Client.Entities\MoviesDB.Client.Entities.csproj">
+      <Project>{A74D6FB0-6756-45A3-BDF0-7B2AC3544F59}</Project>
+      <Name>MoviesDB.Client.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoviesDB.Client.Proxies\MoviesDB.Client.Proxies.csproj">
+      <Project>{B45DF093-46E0-44C5-A584-47AC3B62B93A}</Project>
+      <Name>MoviesDB.Client.Proxies</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoviesDB.Data.Contracts\MoviesDB.Data.Contracts.csproj">
+      <Project>{339F601C-6F77-4153-907E-5AE42F559BF2}</Project>
+      <Name>MoviesDB.Data.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MoviesDB.Data\MoviesDB.Data.csproj">
+      <Project>{FFA3203E-D1E4-41C4-9E82-BA47B32955ED}</Project>
+      <Name>MoviesDB.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="PowerPivotExcelClientAddInLib">
+      <Guid>{E0D7D000-23E7-4DD7-859D-05117D6278C7}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,171 @@
+﻿@using Kendo.Mvc.UI
+
+@{
+    ViewBag.Title = "title";
+}
+<div class="page-head">
+    <!-- BEGIN PAGE TITLE -->
+    <div class="page-title">
+        <h1>Director <small>Complete list of available directors</small></h1>
+    </div>
+    <!-- END PAGE TITLE -->
+</div>
+<!-- END PAGE HEAD -->
+<!-- END PAGE HEADER-->
+
+<div class="row">
+    <div class="col-md-12">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-globe"></i>Directors
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse"></a>
+                    <a href="javascript:;" class="remove"></a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="btn-group">
+                                <form method="GET" action="@Url.Action("Create", "Director")">
+                                    <button type="submit" class="btn green">
+                                        Create a new one <i class="fa fa-plus"></i>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                @(Html.Kendo().Grid<Director>().Name("grid").Columns(columns =>
+                    {
+                        columns.Bound(c => c.FullName).Title("Name");
+                        //columns.Bound(null).Title("Directors");
+                        columns.Command(col =>
+                        {
+                            col.Edit().CancelText("Cancel").UpdateText("Save").Text("Edit");
+                            col.Destroy().Text("Delete");
+                            //col.Custom("f").Text("<a href='/admin/genre/edit/#= Id#'>Düzenle</a>");
+
+                        }).Title("Operation").Width(184);
+                        columns.Bound(x => x.Id).Title("").ClientTemplate("<a href='/admin/director/edit/#= Id#'>Edit</a>").Width(40);
+                        columns.Bound(x => x.Id).Title("").ClientTemplate("<a href='/admin/director/details/#= Id#'>Details</a>").Width(50);
+                    })
+                        //.HtmlAttributes(new { style = "height: 380px;" })
+                        //.Scrollable(scr=>scr.Height(230))
+                        //.Groupable()
+                        //.Sortable()
+                    .Pageable(pageable => pageable
+                        .Refresh(true)
+                        .PageSizes(new int[] { 25, 50, 100 })
+                        .ButtonCount(10))
+                        .ToolBar(toolbar =>
+                        {
+                            toolbar.Template(
+                                @<text>
+                                    <div class="toolbar">
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></span>
+                                                    <input type="text" class="form-control" id='searchInput' placeholder="Search for...">
+                                                    <span class="input-group-btn">
+                                                        <button class="btn btn-default" id="btnSearch" type="button" onclick="search()">
+                                                            <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                                                        </button>
+                                                        <button class="btn btn-default" id="btnReset" type="button" onclick="reset()">
+                                                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </text>);
+                        })
+                                .DataSource(dataSource => dataSource
+                                    .Ajax()
+                                    .PageSize(25)
+                                    .Events(e => e.Sync("sync_handler"))
+                                    .Events(e => e.Error("error_handler"))
+                                    .Model(mod =>
+                                        {
+                                            mod.Id(p => p.Id);
+                                            mod.Field(x => x.Id).Editable(false);
+                                        })
+                                    .Destroy(action => action.Action("Director_Delete", "Director"))
+                                    .Update(action => action.Action("Director_Update", "Director"))
+                                    .Read(read => read.Action("Director_Read", "Director").Data("additionalData")))
+                                    .Editable(editable => editable.Mode(GridEditMode.InLine)
+                              ))
+
+                <script src="~/Areas/Admin/Content/kendo/js/kendo.all.min.js"></script>
+                <script src="~/Areas/Admin/Content/kendo/js/kendo.aspnetmvc.min.js"></script>
+
+                <link href="~/Areas/Admin/Content/kendo/styles/kendo.common.min.css" rel="stylesheet" />
+                <link href="~/Areas/Admin/Content/kendo/styles/kendo.common-bootstrap.core.min.css" rel="stylesheet" />
+
+                <link href="~/Areas/Admin/Content/kendo/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+                <link href="~/Areas/Admin/Content/kendo/kendopatch.css" rel="stylesheet" />
+
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#btnReset').addClass("disabled");
+                        $('#btnSearch').addClass("disabled");
+
+                        $("#searchInput").focus(function () {
+
+                            var hasClass = $("#btnSearch").hasClass("disabled");
+                            if (hasClass)
+                                $("#btnSearch").removeClass("disabled");
+                        });
+
+                        $("#searchInput").on("focusout", function () {
+                            var abs = $("#searchInput").val();
+                            if (!abs) {
+                                // Boş
+                                $("#btnSearch").addClass("disabled");
+
+                            } else {
+                                // Dolu
+                            }
+                        });
+                    });
+
+                    function sync_handler(e) {
+                        this.read();
+                    }
+                    function error_handler(e) {
+                        this.read();
+                    }
+
+                    function search(e) {
+                        var grid = $("#grid").data("kendoGrid");
+                        grid.dataSource.page(1);
+
+                        $('#btnReset').removeClass("disabled");
+                        $('#btnSearch').addClass("disabled");
+                    }
+
+                    function reset() {
+                        $("#searchInput").val("");
+                        var grid = $("#grid").data("kendoGrid").dataSource.read();
+                        $("#btnReset").addClass("disabled");
+                    }
+
+                    function additionalData() {
+                        //alert($("#searchInput").val());
+                        return {
+                            searchTerm: $("#searchInput").val()
+                        }
+                    }
+                </script>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>

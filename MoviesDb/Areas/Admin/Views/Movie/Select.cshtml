@@ -1,0 +1,73 @@
+﻿@using Kendo.Mvc.UI
+
+<div class="page-head">
+    <!-- BEGIN PAGE TITLE -->
+    <div class="page-title">
+        <h1>Movie <small></small></h1>
+    </div>
+    <!-- END PAGE TITLE -->
+</div>
+<!-- END PAGE HEAD -->
+<!-- END PAGE HEADER-->
+
+<div class="row">
+    <div class="col-md-8">
+        <!-- BEGIN EXAMPLE TABLE PORTLET-->
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-globe"></i>Movie selection
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <form action="/admin/movie/edit/" method="get">
+                                <div class="form-group">
+                                    <div class="col-md-4">
+                                        @(Html.Kendo().DropDownList()
+                                              .Name("id")
+                                              .MinLength(2)
+                                              .DataTextField("Name")
+                                              .DataValueField("Id")
+                                              .HtmlAttributes(new {style = "width:233px", @class = "form-control"})
+                                              .Filter("contains")
+                                              .DataSource(source =>
+                                              {
+                                                  source.Read(read =>
+                                                  {
+                                                      read.Action("Movie_Search", "Movie");
+                                                  })
+                                                      .ServerFiltering(true);
+                                              }))
+                                        <span class="help-block" style="width: 100px">
+
+                                        </span>
+                                        <input type="submit" class="btn btn-primary" value="Go!" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END EXAMPLE TABLE PORTLET-->
+    </div>
+</div>
+
+
+
+
+<script src="~/Scripts/jquery-2.1.4.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+
+<script src="~/Areas/Admin/Content/kendo/js/kendo.all.min.js"></script>
+<script src="~/Areas/Admin/Content/kendo/js/kendo.aspnetmvc.min.js"></script>
+
+<link href="~/Areas/Admin/Content/kendo/styles/kendo.common.min.css" rel="stylesheet" />
+<link href="~/Areas/Admin/Content/kendo/styles/kendo.common-bootstrap.core.min.css" rel="stylesheet" />
+
+<link href="~/Areas/Admin/Content/kendo/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Areas/Admin/Content/kendo/kendopatch.css" rel="stylesheet" />

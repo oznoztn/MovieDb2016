@@ -1,0 +1,82 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <title>jGetFunction</title>
+</head>
+<body>
+    <div>
+        <input type="button" id="btnLoad" value="Get" />
+
+        <br />
+        <br />
+
+        <input type="text" id="txtName" />
+        <input type="text" id="txtLastName" />
+        <input type="button" id="btnSayHello" value="Say hello" />
+
+        <br />
+        <br />
+        <input type="button" id="btnThree" value="Get Countries"/>
+        <input type="button" id="btnFourth" value="Get Countries 2"/>
+
+    </div>
+    <script>
+        $(document).ready(function () {
+            // NOT
+            // jQuery AJAX Get ve Post fonksiyonları wrapper fonksiyonlardır.
+            // Arka planda $.ajax() metodunu kullanırlar.
+            // Diğer bir deyişe bu metotlar $.ajax() metodunun kırpılmış halleridir.
+            // Doğal olarak $.ajax() metodunun bütün fonksiyonelliğine sahip değillerdir.
+
+            // Load data from the server using jQuery AJAX GET request
+            //$.get(url, data, callback, type)
+
+            // url : request yapılacak url
+            // data : server'a gönderilecek veri
+            // callback : request tamamlandığında çalıştırılacak fonksiyon
+            // type : server'dan beklenen veri tipi
+
+            // Parametre yok
+            $('#btnLoad').on("click", function () {
+                $.get('@Url.Action("First", "JqueryAjaxGetFunction")', null, function (data) {
+                    console.log(data);
+                });
+            });
+
+            // Birden fazla parametre
+            $('#btnSayHello').on("click", function () {
+                var text = $('#txtName').val();
+                var text2 = $('#txtLastName').val();
+
+                $.get('/JqueryAjaxGetFunction/Second', { name: text, lastName: text2 }, function (response) {
+                    console.log(response);
+                });
+            });
+
+            // type : html yaptığımda serverdan dönen json objesini json string haline getiriyor
+            // (arkaplanda JSON.stringify(response) çalışıyor olmalı)
+            $('#btnThree').on("click", function () {
+                $.get('/JqueryAjaxGetFunction/ListCountries', null, function (response) {
+                    console.log(response);
+                }, 'html');
+            });
+
+            // type : json (server'dan dönen json objesi saf halinde)
+            $('#btnFourth').on("click", function () {
+                $.get('/JqueryAjaxGetFunction/ListCountries', null, function (response) {
+                    console.log(response);
+                }, 'json');
+            });
+
+        });
+
+    </script>
+</body>
+</html>

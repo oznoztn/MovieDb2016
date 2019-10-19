@@ -1,0 +1,199 @@
+﻿@using Kendo.Mvc.UI
+@model MoviesDB.Client.Entities.DTOs.MovieDetailsData
+
+<!-- BEGIN PAGE HEADER-->
+<!-- BEGIN PAGE HEAD -->
+<div class="page-head">
+    <!-- BEGIN PAGE TITLE -->
+    <div class="page-title">
+        <h1>Movie <small></small></h1>
+    </div>
+    <!-- END PAGE TITLE -->
+</div>
+<!-- END PAGE HEAD -->
+<!-- END PAGE HEADER-->
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-equalizer font-red-sunglo"></i>
+                    <span class="caption-subject font-red-sunglo bold uppercase">Create</span>
+                    <span class="caption-helper">Create a new movie</span>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <div class="form-horizontal">
+                    <div class="form-body">
+                        <h3 class="form-section">Base Info</h3>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Name</label>
+                            <div class="col-md-6">
+                                @Model.Name
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">As Known As</label>
+                            <div class="col-md-6">
+                                @Model.Aka
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Running Time</label>
+                            <div class="col-md-2">
+                                @Model.RunningTime
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Rating</label>
+                            <div class="col-md-2">
+                                @Model.Rating
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Votes</label>
+                            <div class="col-md-2">
+                                @Model.VoteCount
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Release Date</label>
+                            <div class="col-md-2">
+                                @Model.Year
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">IMDB Link</label>
+                            <div class="col-md-2">
+                                @Model.ImdbLink
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Language</label>
+                            <div class="col-md-2">
+                                @Model.Language
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Country</label>
+                            <div class="col-md-2">
+                                @Model.Country
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Cover</label>
+                            <div class="col-md-2">
+                                <img src="~/Content/images/movies/@Model.CoverImage" style="height: 317px; width: 214px; display: block;">
+                            </div>
+                        </div>
+
+                        <h3 class="form-section">Director</h3>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Name</label>
+                            <div class="col-md-6">
+                                @Model.DirectorName
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">IMDB Link</label>
+                            <div class="col-md-2">
+                                @Model.DirectorImdbLink
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Photo</label>
+                            <div class="col-md-2">
+                                <img src="~/Content/images/people/@Model.DirectorPhoto" style="height: 317px; width: 214px; display: block;">
+                            </div>
+                        </div>
+
+                        <h3 class="form-section">Actors</h3>
+                        <div class="tiles">
+                            @foreach (var actor in Model.Actors)
+                            {
+                                <div class="tile double-down bg-blue-hoki">
+                                    <img src="~/Content/images/people/@actor.Photo" style="height: 317px; width: 214px; display: block;">
+                                    <div class="tile-object">
+                                        <div class="name">
+                                            @actor.FullName
+                                        </div>
+                                        @*<div class="number">
+                                            6
+                                        </div>*@
+                                    </div>
+                                </div>
+                            }
+                        </div>
+
+                        <h3 class="form-section">News</h3>
+                        @(Html.Kendo().Grid(Model.News)
+                              .Name("Grid")
+                              .Columns(columns =>
+                              {
+                                  columns.Bound(n => n.Header).Title("Header");
+                                  columns.Bound(n => n.CreatedAt).Title("Created At").Width(200);
+                              })
+                              .Pageable()
+                              .Sortable()
+                              .DataSource(dataSource => dataSource
+                                  .Ajax()
+                                  .PageSize(20)
+                                  .ServerOperation(false)
+                              )
+                              )
+
+                        <!--/row-->
+                    </div>
+
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <input type="submit" value="Submit" class="btn green"/>
+                                <a href="/admin/movie/index" type="button" class="btn default">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Areas/Admin/Content/kendo/js/kendo.all.min.js"></script>
+<script src="~/Areas/Admin/Content/kendo/js/kendo.aspnetmvc.min.js"></script>
+
+<link href="~/Areas/Admin/Content/kendo/styles/kendo.common.min.css" rel="stylesheet" />
+<link href="~/Areas/Admin/Content/kendo/styles/kendo.common-bootstrap.core.min.css" rel="stylesheet" />
+
+<link href="~/Areas/Admin/Content/kendo/styles/kendo.bootstrap.min.css" rel="stylesheet" />
+<link href="~/Areas/Admin/Content/kendo/kendopatch.css" rel="stylesheet" />
+
+<style>
+    .col-md-2 {
+        padding-top: 8px;
+        width: 16.66666667%;
+    }    
+    .col-md-6 {
+        padding-top: 8px;
+    }
+    
+    .tiles .tile.double-down {
+        width: 214px !important;
+        height: 317px !important;
+        color: #FFFFFF !important;
+    }
+
+</style>

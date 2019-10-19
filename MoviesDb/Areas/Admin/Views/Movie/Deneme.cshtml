@@ -1,0 +1,26 @@
+﻿@model object[]
+@{
+    ViewBag.Title = "Deneme";
+}
+
+<h2>Deneme</h2>
+
+
+@{
+    if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            @item <br/>
+        }
+    }
+    }
+
+<form action="/admin/movie/deneme" method="post">
+
+    @foreach (var item in (Dictionary<int,string>)ViewBag.Dict)
+    {
+        <input type="checkbox" name="values" value="@item.Key"/> @item.Value
+    }
+    <input type="submit" value="Gönder"/>
+</form>

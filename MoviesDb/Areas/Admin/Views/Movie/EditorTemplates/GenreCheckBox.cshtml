@@ -1,0 +1,6 @@
+﻿@model MoviesDb.Areas.Admin.Models.MovieVM.GenreCheckBox
+
+@Html.HiddenFor(t => t.Id)
+
+@Html.CheckBoxFor(t => t.IsSelected)
+@Html.DisplayFor(t => t.Name)
